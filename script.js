@@ -11,6 +11,8 @@ const frogMessage = document.getElementById("frogMessage");
 
 const musicFrame = document.getElementById("musicFrame");
 
+const chaosContainer = document.getElementById("chaosDecorations");
+
 const videoID = "T1jK3pLOjY0";
 
 const text = `Since the day we started dating, I knew that this was what I wanted from life. You brought nothing but happiness, love, and so many beautiful moments into my life. ❤️
@@ -36,7 +38,62 @@ Here's to many, many more. 🥂❤️`;
 
 let started = false;
 
+
+/* 🐱🐸 RANDOM CHAOS */
+
+const animals = [
+  "🐱",
+  "🐱",
+  "🐈",
+  "🐈‍⬛",
+  "🐸",
+  "🐸",
+  "🐸"
+];
+
+function createChaosAnimals() {
+
+  if (!chaosContainer) return;
+
+  chaosContainer.innerHTML = "";
+
+  for (let i = 0; i < 18; i++) {
+
+    const animal = document.createElement("div");
+
+    animal.className = "chaos-animal";
+
+    animal.textContent =
+      animals[Math.floor(Math.random() * animals.length)];
+
+    const size = Math.floor(Math.random() * 35) + 35;
+
+    animal.style.fontSize = `${size}px`;
+
+    animal.style.left = `${Math.random() * 92}%`;
+
+    animal.style.top = `${Math.random() * 92}%`;
+
+    animal.style.animationDuration =
+      `${Math.random() * 5 + 5}s`;
+
+    animal.style.animationDelay =
+      `${Math.random() * 4}s`;
+
+    chaosContainer.appendChild(animal);
+  }
+}
+
+
+/* Start the chaos immediately */
+
+createChaosAnimals();
+
+
+/* ❤️ OPEN WEBSITE */
+
 openButton.addEventListener("click", () => {
+
   if (started) return;
 
   started = true;
@@ -45,84 +102,57 @@ openButton.addEventListener("click", () => {
     `https://www.youtube.com/embed/${videoID}?autoplay=1&loop=1&playlist=${videoID}&controls=0&playsinline=1&rel=0`;
 
   opening.classList.add("hidden");
+
   letterSection.classList.remove("hidden");
 
   startTyping();
 });
 
+
+/* ✍️ TYPEWRITER */
+
 function startTyping() {
+
   let index = 0;
 
   const speed = 14;
 
   function typeNextCharacter() {
+
     if (index < text.length) {
+
       letterText.textContent += text.charAt(index);
+
       index++;
 
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-      });
-
       setTimeout(typeNextCharacter, speed);
+
     } else {
+
       cursor.classList.add("hidden");
 
       setTimeout(() => {
+
         frogArea.classList.remove("hidden");
 
         frogArea.scrollIntoView({
           behavior: "smooth",
           block: "center"
         });
+
       }, 700);
+
     }
   }
 
   typeNextCharacter();
 }
 
+
+/* 🐸 FROG */
+
 frogButton.addEventListener("click", () => {
+
   frogMessage.classList.toggle("hidden");
+
 });
-// 🐱🐸 RANDOM CAT & FROG GENERATOR
-
-const chaosContainer = document.getElementById("chaosDecorations");
-
-const animals = [
-  "🐱",
-  "🐱",
-  "🐱",
-  "🐈",
-  "🐸",
-  "🐸",
-  "🐸",
-  "🐊"
-];
-
-const chaosCount = 18;
-
-for (let i = 0; i < chaosCount; i++) {
-  const animal = document.createElement("div");
-
-  animal.classList.add("chaos-animal");
-
-  animal.textContent =
-    animals[Math.floor(Math.random() * animals.length)];
-
-  const size = Math.floor(Math.random() * 35) + 35;
-
-  animal.style.fontSize = `${size}px`;
-
-  animal.style.left = `${Math.random() * 94}%`;
-  animal.style.top = `${Math.random() * 94}%`;
-
-  animal.style.animationDuration =
-    `${Math.floor(Math.random() * 5) + 5}s`;
-
-  animal.style.animationDelay =
-    `${Math.random() * 5}s`;
-
-  chaosContainer.appendChild(animal);
-}
