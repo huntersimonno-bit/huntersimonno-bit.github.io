@@ -86,3 +86,43 @@ function startTyping() {
 frogButton.addEventListener("click", () => {
   frogMessage.classList.toggle("hidden");
 });
+// 🐱🐸 RANDOM CAT & FROG GENERATOR
+
+const chaosContainer = document.getElementById("chaosDecorations");
+
+const animals = [
+  "🐱",
+  "🐱",
+  "🐱",
+  "🐈",
+  "🐸",
+  "🐸",
+  "🐸",
+  "🐊"
+];
+
+const chaosCount = 18;
+
+for (let i = 0; i < chaosCount; i++) {
+  const animal = document.createElement("div");
+
+  animal.classList.add("chaos-animal");
+
+  animal.textContent =
+    animals[Math.floor(Math.random() * animals.length)];
+
+  const size = Math.floor(Math.random() * 35) + 35;
+
+  animal.style.fontSize = `${size}px`;
+
+  animal.style.left = `${Math.random() * 94}%`;
+  animal.style.top = `${Math.random() * 94}%`;
+
+  animal.style.animationDuration =
+    `${Math.floor(Math.random() * 5) + 5}s`;
+
+  animal.style.animationDelay =
+    `${Math.random() * 5}s`;
+
+  chaosContainer.appendChild(animal);
+}
